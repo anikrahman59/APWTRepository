@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<body onload="loadDoc()">
+<h2>Show Doctor List</h2>
+
+<table class="table custom-table" id="show">
+  </table>
+
+<script>
+function loadDoc() {
+
+let tab =
+        `<thead>
+        <tr>
+          <th scope="col">Doctor Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Password</th>
+          <th scope="col">Gender</th>
+          <th scope="col">BloodGroup</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Specialized</th>
+        </tr>
+      </thead>`
+         ;
+
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var obj_arr = JSON.parse( this.responseText);
+      console.log(obj_arr);
+
+     for (let i = 0; i < obj_arr.length; i++) {
+
+      tab +=
+    `<tr>
+    <td>${obj_arr[i].doctor_name} </td>
+    <td>${obj_arr[i].doctor_email}</td>
+    <td>${obj_arr[i].doctor_password}</td>
+    <td>${obj_arr[i].doctor_gender}</td>
+    <td>${obj_arr[i].doctor_bg}</td>
+    <td>${obj_arr[i].doctor_phone}</td>
+    <td>${obj_arr[i].doctor_specialized}</td>
+    </tr>`;
+
+      }
+      document.getElementById("show").innerHTML = tab;
+    }
+  };
+  xhttp.open("GET", "http://127.0.0.1:8000/api/doctorList");
+  xhttp.send();
+}
+</script>
+</body>
+</html>
