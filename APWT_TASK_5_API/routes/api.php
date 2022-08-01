@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/doctorList',[DoctorAPIController::class, 'list']);
-Route::post('/doctor',[DoctorAPIController::class, 'doctor_post']);
+Route::post('/doctor',[DoctorAPIController::class, 'doctor']);
 

@@ -13,8 +13,9 @@ class DoctorAPIController extends Controller
         return $doctors;
     } 
 
-    public function doctor_post(Request $req){
-         $dd = new dd();
+    public function doctor(Request $req)
+    {
+         $dd = new Doctor();
 
          $dd->doctor_name  = $req->doctor_name;
          $dd->doctor_email = $req->doctor_email;
