@@ -3,11 +3,35 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import axios from 'axios';
+import { BrowserRouter as Router , Route, Routes} from 'react-router-dom';
+import Home from './Components/Home';
+import Login from './Components/Login';
+import Doctors from './Components/Doctors';
+import SignOut from './Components/SignOut';
+
+var token=null;
+if(localStorage.getItem('user')){
+  var obj=JSON.parse(localStorage.getItem('user'));
+  token=obj.access_token;
+}
+axios.defaults.headers.common["Authorization"]= token;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+
+  <Router>
+    <Routes>
+       <Route exact path='/home' element={<Home/>} />
+       <Route exact path='/login' element={<Login/>} />
+       <Route exact path='/doctors' element={<Doctors/>} />
+       <Route exact path='/logout' element={<SignOut/>} />
+    </Routes>
+  </Router>
+
   </React.StrictMode>
 );
 
